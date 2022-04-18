@@ -1,0 +1,79 @@
+<html lang="pt-br">
+	<head th:replace="~{base :: head}"></head>
+<body>
+<script>
+function produtoAtualizado() {
+  alert("Produto atualizado");
+}
+</script>
+
+	<div th:replace="~{base :: logo}" ></div>
+	<div class="container">
+		<nav class="navbar navbar-dark bg-dark navbar-expand d-flex justify-content-between mb-3">
+		
+      		<div class="navbar navbar-nav ">
+      			<a class="nav-item nav-link active">Atualizar Pedido</a>
+      		</div>
+      			
+      		<div style="padding-right: 10px">
+      			<a th:href="@{/home}"><button class="btn btn-outline-light" >Listar Pedidos</button>	</a>
+      		</div>
+      	</nav>
+      	
+      	
+	      	<div class="card mb-3">
+	      		<form class="card-body" th:object="${pedido}" th:action="@{/pedido/recadastrar}" action="#" method="POST" >
+			      		
+			      		<div class="form-floating mb-3">
+			 				 <input th:field="*{id}" th:errorclass="is-invalid" type="text" class="form-control" readonly="readonly" placeholder="id do pedido">
+			 				 <label for="id">Id do pedido</label>
+						</div>
+			      		<div class="form-floating mb-3">
+			 				 <input th:field="*{nome}" th:errorclass="is-invalid" type="text" class="form-control"  placeholder="digite o nome do produto...">
+			 				 <label for="nome">Nome do produto</label>
+			 				 <div class="invalid-feedback" th:errors="*{nome}">Mensagens de erro nome </div>
+						</div>
+						
+						<div class="form-floating mb-3">
+			  				<textarea th:field="*{descricao}" th:errorclass="is-invalid"class="form-control" rows="2"  placeholder="digite a descricao produto..."></textarea>
+			  				<label for="descricao">Descri��o do produto</label>
+			  				<div class="invalid-feedback" th:errors="*{descricao}"></div>
+						</div>
+							
+						<div class="form-floating mb-3">
+			  				<input th:field="*{valorNegociado}" th:errorclass="is-invalid" type="text" class="form-control"  placeholder="digite o valor do produto...">
+			  				<label for="valorNegociado">Valor do produto</label>
+			  				<div class="invalid-feedback" th:errors="*{valorNegociado}"></div>
+						</div>	
+						
+						<div class="form-floating mb-3">
+			 				 <input th:field="*{urlProduto}" th:errorclass="is-invalid" type="text" class="form-control" placeholder="digite a URL do produto...">
+			 				 <label for="urlProduto" >URL do produto</label>
+			 				 <div class="invalid-feedback" th:errors="*{urlProduto}"></div>
+						</div>
+						
+						<div class="form-floating mb-3">
+			 				 <input th:field="*{urlImagem}" type="text" class="form-control" placeholder="digite a URL da imagem do produto...">
+							 <label for="urlImagem">URL da imagem do produto</label>
+							 <div class="invalid-feedback" th:errors="*{urlImagem}"></div>
+						</div>
+						
+						
+						<div class="form-floating mb-3">
+						 	
+						 	 <select name="status">
+    							<option th:each="status : ${T(br.com.alura.mvc.mudi.model.Status).values()}" 
+        						th:value="${status}" th:text="${status}"></option>
+							</select>
+						</div>
+						
+						<div class="d-grid gap-2 col-6 mx-auto">
+		  					<button class="btn btn-success" type="submit" onclick="produtoAtualizado()">Atualizar</button>
+						</div>
+					
+				</form>
+			</div>
+		
+	</div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<html lang="pt-br">
+	<head th:replace="~{base :: head}"></head>
+<body>
+
+<script>
+function produtoDeletado() {
+  alert("Produto deletado!");
+}
+</script>
+
+	<div th:replace="~{base :: logo}" ></div>
+	<div class="container">
+		<nav class="navbar navbar-dark bg-dark navbar-expand d-flex justify-content-between mb-3">
+		
+      		<div class="navbar navbar-nav ">
+      			<a class="nav-item nav-link active">Remover Pedido</a>
+      		</div>
+      			
+      	</nav>
+      	
+      	
+	      	<div class="card mb-3">
+	      		<form class="card-body" th:object="${pedido}" th:action="@{/pedido/excluir}" action="#" method="POST" >
+			      		
+			      		<div style="text-align: center" class="mb-3">
+			      			<h3 >Tem certeza que deseja exluir esse pedido?</h3>
+			      		</div>
+			      		<div class="form-floating mb-3">
+			 				 <input th:field="*{id}" th:errorclass="is-invalid" type="text" class="form-control" readonly="readonly" placeholder="id do pedido">
+			 				 <label for="id">Id do pedido</label>
+						</div>
+						<div class="form-floating mb-3">
+			 				 <input th:field="*{nome}" th:errorclass="is-invalid" type="text" class="form-control" readonly="readonly" placeholder="id do pedido">
+			 				 <label for="nome">Id do pedido</label>
+						</div>
+			      		
+			      		<div class="row">
+								<div class="d-grid gap-2 col-6 mx-auto">
+		  							<button class="btn btn-success" type="submit" onclick="produtoDeletado()">Sim, excluir</button>
+								</div><div class="d-grid gap-2 col-6 mx-auto">
+		  							<a class="btn btn-success" th:href="@{/home}">Nao, voltar para home</a>
+								</div>
+						</div>
+					
+				</form>
+			</div>
+		
+	</div>
+</body>
+</html>

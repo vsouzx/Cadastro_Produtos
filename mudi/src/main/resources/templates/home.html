@@ -1,0 +1,93 @@
+<html lang="pt-br">
+	<head th:replace="~{base :: head}"></head>
+<body>
+
+	<div th:replace="~{base :: logo}"></div>
+			
+	<div class="container ">
+	
+		<nav class="navbar navbar-dark bg-dark navbar-expand d-flex justify-content-between mb-3">
+			
+      			<div class="navbar navbar-nav ">
+      				
+      					<a class="nav-item nav-link" th:href="@{/home}">Todos</a>
+          				<a class="nav-item nav-link" th:href="@{/home/aguardando}">Aguardando</a>
+        				<a class="nav-item nav-link" th:href="@{/home/aprovado}">Aprovado</a>
+          				<a class="nav-item nav-link" th:href="@{/home/entregue}">Entregue</a>	
+          			
+      			</div>
+      			
+      			<div style="padding-right: 10px">
+      				<a th:href="@{/pedido/novo}"><button class="btn btn-outline-light">Novo</button>	</a>
+      			</div>
+      			
+      					
+		</nav>
+		
+		<div class="card mb-3" th:each="pedido : ${listaPedidos}">
+		
+		
+			<div class="card-header alert-dark " style="font-weight: bold; text-transform: uppercase;">
+				
+					<div class="row ">
+						<div th:text="${pedido.nome}" class="col-12">Nome do produto</div>
+						
+						<div th:text="${pedido.status}" class="col-12"style="color: green">Nome do produto</div>
+						
+					</div>
+				
+			</div>
+			
+				
+			<div class="card-body">
+
+				<div class="row mb-3">
+					<div class="col-12 col-sm-12 col-md-6 col-lg-8 col-xl-9 .col-xxl-9 mb-2">
+					
+					
+						<div class="row  mb-3">
+							<div class="col-5 col-sm-6 col-md-12 col-lg-6 col-xl-6 .col-xxl-6">
+								Valor: R$<span th:text="${pedido.valorNegociado}">200,99</span>
+							</div>
+		
+							<div class="col-7 col-sm-6 col-md-12 col-lg-6 col-xl-6 .col-xxl-6">
+								Data da entrega: <span th:text="${pedido.dataEntrega}">10/02/2022</span>
+							</div>
+						</div>
+						
+						<div>Produto</div>
+						<div class="input-group mb-3">
+							<input readonly="readonly" class="form-control" th:value="${pedido.urlProduto}" 
+								value="url do produto" />
+						</div>
+	
+						<div>Descrição</div>
+						<div>
+							<textarea class="form-control" placeholder="descrição do pedido"
+								th:text="${pedido.descricao}" readonly="readonly"></textarea>
+						</div>
+					</div>
+					
+					<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 .col-xxl-10">
+						<div class="img-thumbnail" style="text-align:center">
+							<img th:src="${pedido.urlImagem}" width="140" height="220" src="" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+				
+					<div class="d-grid gap-2 col-6 mx-auto">
+		  					<a th:href="@{/pedido/atualizar/{id}(id=${pedido.id})}" class="btn btn-outline-dark">Atualizar pedido</a>
+					</div>
+					<div class="d-grid gap-2 col-6 mx-auto">
+		  					<a th:href="@{/pedido/excluir/{id}(id=${pedido.id})}" class="btn btn-outline-dark">Excluir pedido</a>
+					</div>
+				
+					
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</body>
+</html>
